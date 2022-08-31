@@ -1,0 +1,52 @@
+<div fxLayout="row">
+  <div fxFlex="65"  class="video-detail">
+    <div fxLayout="column" fxLayoutGap="8px">
+      <div class="video-player">
+      <app-video-player *ngIf="videoUrl" [videoUrl]="videoUrl"></app-video-player>
+      </div>
+      <div class="mat-title">{{videoTitle}}</div>
+      <div fxLayout="row">
+        <div fxFlex="50">
+          <span class="view-count">{{viewCount}} views</span>
+          <span class="dot"></span>
+          <span class="video-upload-date">Apr 20, 2019</span>
+        </div>
+        <div fxFlex="50" fxLayoutAlign="end">
+          <span class="like-dislike-section">
+              <button (click)="onLike()" mat-icon-button class="thumbs-up">
+                <mat-icon>thumb_up_off_alt</mat-icon>
+                {{likeCount}}
+              </button>
+              <button (click)="onDislike()" mat-icon-button class="thumbs-down">
+                <mat-icon>thumb_down_off_alt</mat-icon>
+                {{dislikeCount}}
+              </button>
+          </span>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <mat-card-header>
+        <mat-card-title>Bektas</mat-card-title>
+        <mat-card-subtitle class="subtitles">65K Subscribers</mat-card-subtitle>
+        <button *ngIf="showSubscribeButton; else unsubscribe" (click)="onSubscribe()" class="subscribe-button" mat-raised-button color="warn">SUBSCRIBE</button>
+        <ng-template #unsubscribe>
+          <button (click)="onUnsubscribe()" class="subscribe-button-clicked" mat-raised-button color="accent">
+            UNSUBSCRIBE
+          </button>
+        </ng-template>
+      </mat-card-header>
+      <div>{{videoDescription}}</div>
+      <mat-divider></mat-divider>
+      <mat-chip-list>
+        <ng-template ngFor let-tag [ngForOf]="tags" >
+          <mat-chip>{{tag}}</mat-chip>
+        </ng-template>
+      </mat-chip-list>
+      <mat-divider></mat-divider>
+      <app-comments *ngIf="videoId" [videoId]="videoId" ></app-comments>
+    </div>
+  </div>
+  <div fxFlex="5"></div>
+  <div fxFlex="30" class="suggestion-bar">
+  </div>
+</div>

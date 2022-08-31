@@ -1,0 +1,8 @@
+<mat-card *ngIf="video" class="video-card" routerLink="/video-details/{{video.id}}">
+  <img mat-card-image src="{{video.thumbnailUrl}}" alt="Thumbnail">
+  <mat-card-header class="card-header">
+    <div mat-card-avatar></div>
+    <mat-card-title>{{video.title}}</mat-card-title>
+    <mat-card-subtitle>Bektas</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

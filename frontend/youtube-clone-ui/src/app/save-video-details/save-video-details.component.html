@@ -1,0 +1,59 @@
+<div fxLayout="row wrap">
+  <div fxFlex="20">HI</div>
+  <div fxFlex="30">
+    <div class="mat-title">Add video Metadata</div>
+    <form [formGroup]="saveVideoDetailsForm">
+      <mat-form-field fxLayout="row" appearance="fill">
+        <mat-label>Title</mat-label>
+        <input [formControl]="title"  matInput required>
+      </mat-form-field>
+      <mat-form-field fxLayout="row" appearance="fill">
+        <mat-label>Description</mat-label>
+        <input [formControl]="description" matInput required>
+      </mat-form-field>
+      <mat-form-field fxLayout="row" appearance="fill">
+        <mat-label>Video Status</mat-label>
+        <mat-select [formControl]="videoStatus">
+          <mat-option value="PUBLIC">Public</mat-option>
+          <mat-option value="PRIVATE">Private</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlexFill class="example-chip-list" appearance="fill">
+        <mat-label>Tags</mat-label>
+        <mat-chip-list #chipList aria-label="Tag selection">
+          <mat-chip *ngFor="let tag of tags" (removed)="remove(tag)">
+            {{tag}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input placeholder="Add tag..."
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+      <div>
+        <label for="inputGroupFile01">Upload Thumbnail:</label>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" (change)="onFileSelected($event)"/>
+        </div>
+        <br/>
+
+        <div *ngIf="fileSelected">
+          <p>Selected file:&nbsp;{{selectedThumbnailName}}</p>
+          <button mat-raised-button color="primary" type="submit" (click)="onThumbnailUpload()">Upload</button>
+        </div>
+      </div>
+      <br/>
+      <div>
+        <button type="submit" mat-raised-button color="primary" (click)="saveVideo()">Save</button>
+      </div>
+    </form>
+  </div>
+  <div fxFlex="30">
+    <app-video-player *ngIf="videoUrl" [videoUrl]="videoUrl"></app-video-player>
+  </div>
+  <div fxFlex="20">HI</div>
+</div>
